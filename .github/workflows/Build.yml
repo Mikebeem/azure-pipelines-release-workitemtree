@@ -27,5 +27,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run build --if-present
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        # Artifact name
+        name: release-workitemtree
+        # A file, directory or wildcard pattern that describes what to upload
+        path: ${{ github.workspace }}/**/*.vsix
       env:
         CI: true
