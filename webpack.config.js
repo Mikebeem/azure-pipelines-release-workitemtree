@@ -60,6 +60,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new CopyWebpackPlugin([ { from: "**/*.html", context: "src/Samples" }])
+        new CopyWebpackPlugin([ { from: "**/*.html", context: "src/" }])
     ]
 };
