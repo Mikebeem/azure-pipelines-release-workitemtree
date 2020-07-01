@@ -1,0 +1,29 @@
+//@import "node_modules/azure-devops-ui/Core/_platformCommon.scss";
+@import "node_modules/azure-devops-ui/Core/override.scss";
+
+.sample-hub {
+    font-size: $fontSizeM;
+    background-color: $backgroundColor;
+}
+
+body {
+    background-color: $backgroundColor;
+}
+.ant-table.ant-table-small thead > tr > th {
+    background-color: $backgroundColor;
+}
+.ant-table thead > tr > th {
+    color: $secondary-text;
+    background: $backgroundColor;
+}
+.ant-table {
+    background: $backgroundColor;
+    color: $primary-text;
+}
+.ant-table tbody > tr.ant-table-row:hover > td {
+    background: $communication-background;
+}
+.ant-table-row-indent + .ant-table-row-expand-icon {
+    color: $primary-text;
+    background-color: $backgroundColor;
+}

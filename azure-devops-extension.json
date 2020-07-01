@@ -1,0 +1,40 @@
+{
+    "manifestVersion": 1,
+    "id": "release-workitemtree",
+    "publisher": "mikeb",
+    "version": "0.1.21",
+    "name": "Release Work Item Tree",
+    "description": "Show changed work items tree",
+    "scopes": [
+        "vso.project",
+        "vso.build",
+        "vso.release",
+        "vso.work"
+      ],
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "icons": {
+        "default": "logo.png"
+    },
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "files": [
+        {
+            "path": "static",
+            "addressable": true
+        },
+        {
+            "path": "dist",
+            "addressable": true
+        }
+    ]
+}

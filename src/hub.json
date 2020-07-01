@@ -1,0 +1,42 @@
+{
+    "contributions": [
+        {
+            "id": "feature-release-hub",
+            "type": "ms.vss-web.feature",
+            "description": "Show a tree of changed work items with the release environment.",
+            "targets": [ "ms.vss-web.managed-features", "ms.vss-web.managed-features-onprem" ],
+            "properties": {
+                "name": "Released Work Items Tree form",
+                "userConfigurable": true,
+                "hostConfigurable": true
+            }
+        },
+        {
+            "id": "hub",
+            "type": "ms.vss-web.tab",
+            "targets": [
+                "ms.vss-releaseManagement-web.release-environment-editor-tab"
+            ],
+            "includes": [
+                "ms.vss-tfs-web.tfs-page-data-service",
+                "ms.vss-features.host-navigation-service",
+                "ms.vss-features.extension-data-service",
+                "ms.vss-features.host-dialog-service"
+            ],
+            "properties": {
+                "name": "Work Items",
+                "uri": "dist/Hub/Hub.html",
+                "icon": "asset://static/icon.png",
+                "supportsMobile": true
+            },
+            "constraints": [
+                {
+                  "name": "Feature",
+                  "properties": {
+                      "featureId": "mikeb.release-workitemtree.feature-release-hub"
+                  }
+                }
+              ]
+        }
+    ]
+}
