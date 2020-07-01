@@ -8,8 +8,8 @@ import * as SDK from "azure-devops-extension-sdk";
 import { CommonServiceIds, IHostPageLayoutService } from "azure-devops-extension-api";
 import { Page } from "azure-devops-ui/Page";
 
-import { ReleaseInfo } from "./ReleaseInfo";
-import { showRootComponent } from "./Common";
+import { ReleaseInfo } from "../ReleaseInfo/ReleaseInfo";
+import { showRootComponent } from "../Common";
 
 interface IHubContentState {
     selectedTabId: string;
