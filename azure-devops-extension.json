@@ -3,7 +3,7 @@
     "id": "#{EXTENSIONID}#",
     "publisher": "#{PUBLISHER}#",
     "version": "0.0.3",
-    "name": "Release Work Item Tree",
+    "name": "#{EXTENSIONNAME}#",
     "description": "Show changed work items tree",
     "scopes": [
         "vso.project",

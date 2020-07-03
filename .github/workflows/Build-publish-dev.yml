@@ -1,23 +1,14 @@
-# This is a basic workflow to help you get started with Actions
+name: Build and publish Dev Release Work Item Tree
 
-name: CI
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   pull_request:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
@@ -32,14 +23,13 @@ jobs:
       env:
         PUBLISHER: mikeb
         EXTENSIONID: release-workitemtree
+        EXTENSIONNAME: 'Dev: Release Work Item Tree'
     - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
       with:
-        # Artifact name
         name: release-workitemtree
-        # A file, directory or wildcard pattern that describes what to upload
         path: ${{ github.workspace }}/**/*.vsix
   publish:
     if: contains(github.event.pull_request.labels.*.name, 'publish')
@@ -52,8 +42,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: release-workitemtree
-      #Remove later
-      - run: ls -R
+
       - run: sudo npm install -g tfx-cli
       - run: tfx extension publish --vsix *.vsix --token ${{ secrets.PUBLISHERSTOKEN }} --rev-version
 env:
