@@ -28,7 +28,7 @@ jobs:
       with:
         files: '["**/*.json"]'
       env:
-        VERSION: ${VERSION}
+        VERSION: echo ${VERSION}
     
     - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json
 
