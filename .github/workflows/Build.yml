@@ -24,6 +24,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
+    - run: npm install -g tfx-cli
     - run: npm run build:dev --if-present
     - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json
 
@@ -43,7 +44,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: release-workitemtree
-      
+      - run: npm install -g tfx-cli
       - run: tfx extension publish --token ${{ secrets.PUBLISHERSTOKEN }} --rev-version
 env:
   CI: true
