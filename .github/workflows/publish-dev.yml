@@ -23,8 +23,8 @@ jobs:
     - run: npm install
     - run: sudo npm install -g tfx-cli
 
-    - name: Set selected color
-      run: echo '::set-env name=vsix_version::version::$(tfx extension show --token ${{ secrets.PUBLISHERSTOKEN }} --publisher $PUBLISHER --extension-id $EXTENSIONID --json | jq --raw-output ".versions[0].version")'
+    - name: Get Current version
+      run: echo '::set-env name=vsix_version::$(tfx extension show --token ${{ secrets.PUBLISHERSTOKEN }} --publisher $PUBLISHER --extension-id $EXTENSIONID --json | jq --raw-output ".versions[0].version")'
     
     - run: npm run build:dev --if-present
     - uses: cschleiden/replace-tokens@v1
