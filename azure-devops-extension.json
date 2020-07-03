@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "#{EXTENSIONID}#",
     "publisher": "#{PUBLISHER}#",
-    "version": "0.0.3",
+    "version": "#{VERSION}#",
     "name": "#{EXTENSIONNAME}#",
     "description": "Show changed work items in a tree view.",
     "scopes": [
