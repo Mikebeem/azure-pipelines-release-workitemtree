@@ -22,15 +22,16 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: sudo npm install -g tfx-cli
-    - name: Set Version
-        id: version
-        run: echo "::set-output name=version::$(tfx extension show --token ${{ secrets.PUBLISHERSTOKEN }} --publisher $PUBLISHER --extension-id $EXTENSIONID --json | jq --raw-output '.versions[0].version')"
+
+    - name: Set selected color
+      run: echo '::set-env name=vsix_version::version::$(tfx extension show --token ${{ secrets.PUBLISHERSTOKEN }} --publisher $PUBLISHER --extension-id $EXTENSIONID --json | jq --raw-output ".versions[0].version")'
+    
     - run: npm run build:dev --if-present
     - uses: cschleiden/replace-tokens@v1
       with:
         files: '["**/*.json"]'
       env:
-        VERSION: ${{ steps.version.outputs.version }}
+        VERSION: $vsix_version
     
     - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json
 
