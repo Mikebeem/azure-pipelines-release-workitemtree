@@ -22,9 +22,9 @@ jobs:
         files: '["**/*.json"]'
       env:
         PUBLISHER: mikeb
-        EXTENSIONID: release-workitemtree
+        EXTENSIONID: release-workitemtree-dev
         EXTENSIONNAME: 'Dev: Release Work Item Tree'
-    - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json
+    - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json --rev-version
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
