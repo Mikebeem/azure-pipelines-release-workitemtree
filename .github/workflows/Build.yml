@@ -46,6 +46,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: release-workitemtree
+      #Remove later
       - run: ls -R
       - run: sudo npm install -g tfx-cli
       - run: tfx extension publish --vsix **\*.vsix --token ${{ secrets.PUBLISHERSTOKEN }} --rev-version
