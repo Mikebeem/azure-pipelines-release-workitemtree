@@ -26,7 +26,7 @@ jobs:
     - run: npm install
     - run: npm run build:dev --if-present
     - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json
-    
+
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
       with:
@@ -36,7 +36,7 @@ jobs:
         path: ${{ github.workspace }}/**/*.vsix
   publish:
     runs-on: ubuntu-latest
-
+    needs: build
     steps:
       - uses: actions/checkout@v2
 
