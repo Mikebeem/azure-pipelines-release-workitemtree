@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "release-workitemtree",
     "publisher": "mikeb",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "name": "Release Work Item Tree",
     "description": "Show changed work items tree",
     "scopes": [

@@ -5,8 +5,6 @@ name: CI
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -26,8 +24,26 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npm run build --if-present
-      env:
-        TOKEN: ${{ secrets.PUBLISHERSTOKEN }}
-      env:
-        CI: true
+    - run: npm run build:dev --if-present
+    - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json
+    
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        # Artifact name
+        name: release-workitemtree
+        # A file, directory or wildcard pattern that describes what to upload
+        path: ${{ github.workspace }}/**/*.vsix
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: release-workitemtree
+      
+      - run: tfx extension publish --token ${{ secrets.PUBLISHERSTOKEN }} --rev-version
+env:
+  CI: true
