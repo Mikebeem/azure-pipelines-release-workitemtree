@@ -1,4 +1,4 @@
-name: Build and publish Dev Release Work Item Tree
+name: Build and publish Release Work Item Tree to Dev
 
 on:
   pull_request:
@@ -45,5 +45,3 @@ jobs:
 
       - run: sudo npm install -g tfx-cli
       - run: tfx extension publish --vsix *.vsix --token ${{ secrets.PUBLISHERSTOKEN }} --rev-version
-env:
-  CI: true
