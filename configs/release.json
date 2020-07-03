@@ -1,4 +1,4 @@
 {
-  "id": "release-workitemtree",
+  "id": "#{EXTENSIONID}#",
   "public": false
 }

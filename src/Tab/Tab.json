@@ -33,7 +33,7 @@
                 {
                   "name": "Feature",
                   "properties": {
-                      "featureId": "mikeb.release-workitemtree.feature-release-tab"
+                      "featureId": "#{PUBLISHER}#.#{EXTENSIONID}#.feature-release-tab"
                   }
                 }
               ]

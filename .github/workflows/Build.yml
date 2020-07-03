@@ -26,6 +26,12 @@ jobs:
     - run: npm install
     - run: sudo npm install -g tfx-cli
     - run: npm run build:dev --if-present
+    - uses: cschleiden/replace-tokens@v1
+        with:
+          files: '["**/*.json"]'
+        env:
+          PUBLISHER: mikeb
+          EXTENSIONID: release-workitemtree
     - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json
 
     - name: Upload a Build Artifact

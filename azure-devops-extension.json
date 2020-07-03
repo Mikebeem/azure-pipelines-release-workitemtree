@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
-    "id": "release-workitemtree",
-    "publisher": "mikeb",
+    "id": "#{EXTENSIONID}#",
+    "publisher": "#{PUBLISHER}#",
     "version": "0.0.3",
     "name": "Release Work Item Tree",
     "description": "Show changed work items tree",
