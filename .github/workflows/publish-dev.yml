@@ -27,8 +27,8 @@ jobs:
     - uses: cschleiden/replace-tokens@v1
       with:
         files: '["**/*.json"]'
-        env:
-          VERSION: ${VERSION}
+      env:
+        VERSION: ${VERSION}
     
     - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json
 
