@@ -26,7 +26,7 @@ jobs:
       run: echo "::set-env name=VERSION::$(tfx extension show --token ${{ secrets.PUBLISHERSTOKEN }} --publisher $PUBLISHER --extension-id $EXTENSIONID --json | jq --raw-output '.versions[0].version')"
     - name: Show version
       run: echo 'The Current VERSION is' $VERSION
-      
+
     - run: npm run build --if-present
     - uses: cschleiden/replace-tokens@v1
       with:
@@ -51,4 +51,4 @@ jobs:
           name: release-workitemtree
 
       - run: sudo npm install -g tfx-cli
-      - run: tfx extension publish --vsix *.vsix --token ${{ secrets.PUBLISHERSTOKEN }} --rev-version
+      - run: tfx extension publish --vsix *.vsix --token ${{ secrets.PUBLISHERSTOKEN }}

@@ -12,45 +12,56 @@ env:
 jobs:
 
   build:
+    # Job name is Build for Dev
+    name: Build for Dev
+    # This job runs on linux
     runs-on: ubuntu-latest
 
     steps:
+      # This action checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it. 
     - uses: actions/checkout@v2
+      # This action sets by node environment for use in actions.
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+      # Run npm install
     - run: npm install
+      # Install tfx-cli
     - run: sudo npm install -g tfx-cli
-
+      # We use tfx-cli to query the current version of the extension. The value of $PUBLISHER and $EXTENSIONID are set in the environment variables. 
+      # secrets.PUBLISHERSTOKEN is a secret stored at repository level.
     - name: Get Current version
       run: echo "::set-env name=VERSION::$(tfx extension show --token ${{ secrets.PUBLISHERSTOKEN }} --publisher $PUBLISHER --extension-id $EXTENSIONID --json | jq --raw-output '.versions[0].version')"
     - name: Show version
       run: echo 'The Current VERSION is' $VERSION
-      
+      # Run the npm build:dev command to compile the extension with dev settings.
     - run: npm run build:dev --if-present
+      # Use a community action for replacing variables in all json files. Within the json files, tokens are entererd between the prefix #{ and suffix }#.
+      # Environment variables are used. For example, #{PUBLISHER}# will be replaced with the value set in the env variables at the start of this workflow.
     - uses: cschleiden/replace-tokens@v1
       with:
         files: '["**/*.json"]'
-    
+      # Run tfx extension create with --overrides-file to override specific dev settings (i.e. public = false) and --rev-version to update the revision with 1. 
     - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json --rev-version
-
+      # Upload the vsix to use in other jobs. the artifact will be avaiable for download in the action output.
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
       with:
         name: release-workitemtree
         path: ${{ github.workspace }}/**/*.vsix
   publish:
+    # The publish job will only be run if there is a pull request with the label publish.
     if: contains(github.event.pull_request.labels.*.name, 'publish')
 
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v2
-
+        # Download the vsix from the artifact.
       - uses: actions/download-artifact@v2
         with:
           name: release-workitemtree
-
+        # Install tfx-cli
       - run: sudo npm install -g tfx-cli
+        # Run tfx extension publish to publish it to the marketplace.
       - run: tfx extension publish --vsix *.vsix --token ${{ secrets.PUBLISHERSTOKEN }}
