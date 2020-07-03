@@ -4,11 +4,12 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  PUBLISHER: mikeb
+  EXTENSIONID: release-workitemtree-dev
+  EXTENSIONNAME: 'Dev: Release Work Item Tree'
+
 jobs:
-  env:
-    PUBLISHER: mikeb
-    EXTENSIONID: release-workitemtree-dev
-    EXTENSIONNAME: 'Dev: Release Work Item Tree'
 
   build:
     runs-on: ubuntu-latest
