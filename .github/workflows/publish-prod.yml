@@ -1,0 +1,54 @@
+name: Build and publish Release Work Item Tree to Production
+
+on: 
+  push:
+    branches:
+      - main
+
+env:
+  PUBLISHER: mikeb
+  EXTENSIONID: release-workitemtree
+  EXTENSIONNAME: 'Release Work Item Tree'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: sudo npm install -g tfx-cli
+    - name: Get Current version
+      run: echo "::set-env name=VERSION::$(tfx extension show --token ${{ secrets.PUBLISHERSTOKEN }} --publisher $PUBLISHER --extension-id $EXTENSIONID --json | jq --raw-output '.versions[0].version')"
+    - name: Show version
+      run: echo 'The Current VERSION is' $VERSION
+
+    - run: npm run build --if-present
+    - uses: cschleiden/replace-tokens@v1
+      with:
+        files: '["**/*.json"]'
+      
+    - run: tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/release.json --rev-version
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-workitemtree
+        path: ${{ github.workspace }}/**/*.vsix
+  
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: release-workitemtree
+
+      - run: sudo npm install -g tfx-cli
+      - run: tfx extension publish --vsix *.vsix --token ${{ secrets.PUBLISHERSTOKEN }}
