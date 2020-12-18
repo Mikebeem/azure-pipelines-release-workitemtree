@@ -3,7 +3,7 @@ name: Build and publish Release Work Item Tree to Production
 on: 
   push:
     branches:
-      - master
+      - main
 
 env:
   PUBLISHER: mikeb
