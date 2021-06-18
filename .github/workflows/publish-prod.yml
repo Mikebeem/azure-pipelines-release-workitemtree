@@ -24,9 +24,12 @@ jobs:
     - run: sudo npm install -g tfx-cli
     - name: Get Current version
       run: echo "VERSION=$(tfx extension show --token ${{ secrets.PUBLISHERSTOKEN }} --publisher $PUBLISHER --extension-id $EXTENSIONID --json | jq --raw-output '.versions[0].version')" >> $GITHUB_ENV
+    - name: Initial version
+      if: ${{ env.VERSION == null || env.VERSION == '' || env.VERSION == 'null' }}
+      run: echo "VERSION=0.0.1" >> $GITHUB_ENV
     - name: Show version
-      run: echo "The Current VERSION is ${{ env.VERSION }}"
-     
+      run: | 
+            echo "The Current VERSION is ${{ env.VERSION }}"
     - run: npm run build --if-present
     - uses: cschleiden/replace-tokens@v1
       with:
