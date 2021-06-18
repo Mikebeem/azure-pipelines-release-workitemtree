@@ -18,7 +18,6 @@
     "compile:dev": "npm run clean && webpack --mode development",
     "build": "npm run compile",
     "build:dev": "npm run compile:dev",
-    "postbuild": "npm run package-extension -- --rev-version",
     "package-extension": "tfx extension create --manifest-globs azure-devops-extension.json src/**/*.json",
     "publish-extension": "tfx extension publish --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/release.json --token $TOKEN --rev-version",
     "publish-extension:dev": "tfx extension publish --manifest-globs azure-devops-extension.json src/**/*.json --overrides-file configs/dev.json --token $TOKEN --rev-version"
