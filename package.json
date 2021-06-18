@@ -51,7 +51,6 @@
     "less": "^3.13.1",
     "less-loader": "^5.0.0",
     "node-sass": "^4.14.1",
-
     "react-data-export": "^0.6.0",
     "rimraf": "^2.7.1",
     "sass-loader": "~7.1.0",
