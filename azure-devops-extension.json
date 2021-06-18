@@ -46,7 +46,7 @@
     },
     "screenshots": [
         {
-          "path": "static/screenshot-workitem-tree.png"
+          "path": "static/workitems-as-tree.png"
         }
       ],
     "files": [
