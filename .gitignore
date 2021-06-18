@@ -3,3 +3,5 @@ node_modules/
 dist/
 *.vsix
 .vscode/
+webpack.config copy.js
+package copy.json
