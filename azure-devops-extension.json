@@ -1,10 +1,10 @@
 {
     "manifestVersion": 1,
-    "id": "release-workitemtree",
-    "publisher": "mikeb",
-    "version": "0.0.1",
-    "name": "Release Work Item Tree",
-    "description": "Show changed work items tree",
+    "id": "#{EXTENSIONID}#",
+    "publisher": "#{PUBLISHER}#",
+    "version": "#{VERSION}#",
+    "name": "#{EXTENSIONNAME}#",
+    "description": "Show changed work items in a tree view.",
     "scopes": [
         "vso.project",
         "vso.build",
@@ -19,6 +19,14 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
+    "tags": [
+        "Work Items",
+        "Work Item",
+        "Git",
+        "Release",
+        "Commit",
+        "Visualization"
+    ],
     "icons": {
         "default": "logo.png"
     },
@@ -27,6 +35,20 @@
             "path": "overview.md"
         }
     },
+    "links": {
+        "support": {
+          "uri": "https://github.com/Mikebeem/azure-pipelines-release-workitemtree/issues"
+        }
+      },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/Mikebeem/azure-pipelines-release-workitemtree"
+    },
+    "screenshots": [
+        {
+          "path": "static/screenshot-workitem-tree.png"
+        }
+      ],
     "files": [
         {
             "path": "static",

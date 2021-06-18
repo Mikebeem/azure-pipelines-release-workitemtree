@@ -1,7 +1,7 @@
 import "react-app-polyfill/ie11"; 
 import "react-app-polyfill/stable";
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import "./Hub.scss";
+import "./Tab.scss";
 
 import * as React from "react";
 import * as SDK from "azure-devops-extension-sdk";
@@ -11,7 +11,7 @@ import { Page } from "azure-devops-ui/Page";
 import { ReleaseInfo } from "../ReleaseInfo/ReleaseInfo";
 import { showRootComponent } from "../Common";
 
-interface IHubContentState {
+interface ITabContentState {
     selectedTabId: string;
     fullScreenMode: boolean;
     headerDescription?: string;
@@ -19,7 +19,7 @@ interface IHubContentState {
     useCompactPivots?: boolean;
 }
 
-class HubContent extends React.Component<{}, IHubContentState> {
+class TabContent extends React.Component<{}, ITabContentState> {
 
     constructor(props: {}) {
         super(props);
@@ -38,7 +38,7 @@ class HubContent extends React.Component<{}, IHubContentState> {
     public render(): JSX.Element {
 
         return (
-            <Page className="sample-hub flex-grow">
+            <Page className="sample-Tab flex-grow">
                 { this.getPageContent() }
             </Page>
         );
@@ -58,4 +58,4 @@ class HubContent extends React.Component<{}, IHubContentState> {
     }
 }
 
-showRootComponent(<HubContent />);
+showRootComponent(<TabContent />);
