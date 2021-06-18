@@ -2,9 +2,7 @@ name: Build and publish Release Work Item Tree to Dev
 
 on:
   pull_request:
-    branches: [ main ]
-  pull_request:
-    types: [ labeled ]
+    types: [ labeled, opened, synchronize, reopened ]
 
 env:
   PUBLISHER: mikeb
