@@ -1,10 +1,3 @@
-This extension shows all the work items that are related to a release.
+As you probably can see in the code, I'm not a very experienced typescript developer. This is one of my first attempts at writing an application in Typescript. Feel free to contribute if you see improvements.
 
-By default, only the Work Items that are related are shown with the deployments:
-![default view](static/default-workitems.png)
-
-With this extension, your deployment will show an extra tab next to the Logs tab. This tab will show the complete tree of work items related. So, if you relate your commit to a task, it will show the parents of the tasks as well:
-
-![Complete tree](static/workitems-as-tree.png)
-
-With the button Export to Csv, the complete table will be exported to a csv file.
+This is an extension for Azure DevOps, which is being build and deployed with GitHub Actions. 
