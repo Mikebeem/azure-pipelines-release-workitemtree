@@ -33,6 +33,9 @@ jobs:
       # secrets.PUBLISHERSTOKEN is a secret stored at repository level.
     - name: Get Current version
       run: echo "VERSION=$(tfx extension show --token ${{ secrets.PUBLISHERSTOKEN }} --publisher $PUBLISHER --extension-id $EXTENSIONID --json | jq --raw-output '.versions[0].version')" >> $GITHUB_ENV
+    - name: Initial version
+      if: ${{ env.VERSION == null }}
+      run: echo "VERSION=0.0.1"
     - name: Show version
       run: echo "The Current VERSION is ${{ env.VERSION }}"
       # Run the npm build:dev command to compile the extension with dev settings.
