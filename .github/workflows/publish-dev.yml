@@ -32,9 +32,9 @@ jobs:
       # We use tfx-cli to query the current version of the extension. The value of $PUBLISHER and $EXTENSIONID are set in the environment variables. 
       # secrets.PUBLISHERSTOKEN is a secret stored at repository level.
     - name: Get Current version
-      run: echo "::set-env name=VERSION::$(tfx extension show --token ${{ secrets.PUBLISHERSTOKEN }} --publisher $PUBLISHER --extension-id $EXTENSIONID --json | jq --raw-output '.versions[0].version')"
+      run: echo "VERSION=$(tfx extension show --token ${{ secrets.PUBLISHERSTOKEN }} --publisher $PUBLISHER --extension-id $EXTENSIONID --json | jq --raw-output '.versions[0].version')" >> $GITHUB_ENV
     - name: Show version
-      run: echo 'The Current VERSION is' $VERSION
+      run: echo "The Current VERSION is ${{ env.VERSION }}"
       # Run the npm build:dev command to compile the extension with dev settings.
     - run: npm run build:dev --if-present
       # Use a community action for replacing variables in all json files. Within the json files, tokens are entererd between the prefix #{ and suffix }#.
