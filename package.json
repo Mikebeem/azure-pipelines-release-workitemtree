@@ -43,7 +43,7 @@
     "azure-devops-ui": "^2.165.1",
     "base64-inline-loader": "^1.1.1",
     "copy-webpack-plugin": "^4.6.0",
-    "css-loader": "^1.0.1",
+    "css-loader": "^6.7.2",
     "file-loader": "~2.0.0",
     "less-loader": "^5.0.0",
     "node-sass": "~4.12.0",
